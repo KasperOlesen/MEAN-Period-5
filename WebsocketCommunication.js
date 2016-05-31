@@ -1,6 +1,33 @@
 //Using the Google Chrome Developer Tools, developers can inspect the WebSocket handshake as well as the WebSocket frames.
 
-//    Short Example:
+function WebSocketTest()
+{
+    {
+        // Let us open a web socket
+        var ws = new WebSocket("ws://localhost:9998/echo");
+
+        ws.onopen = function()
+        {
+            // Web Socket is connected, send data using send()
+            ws.send("Message to send");
+            alert("Message is sent...");
+        };
+
+        ws.onmessage = function (evt)
+        {
+            var received_msg = evt.data;
+            alert("Message is received...");
+        };
+
+        ws.onclose = function()
+        {
+            // websocket is closed.
+            alert("Connection is closed...");
+        };
+    }
+
+
+//    Short socketIO Example:
 
 //    Client request (just like in HTTP, each line ends with \r\n and there must be an extra blank line at the end):
 
@@ -14,7 +41,7 @@ socket.connect();
 socket.on('connect',function() {
     console.log('Client has connected to the server!');
 });
-// Add a connect listener
+// Add a message listener
 socket.on('message',function(data) {
     console.log('Received a message from the server!',data);
 });
